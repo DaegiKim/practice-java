@@ -5,6 +5,8 @@ import java.util.OptionalInt;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
+
 public class StreamApp {
     public static void main(String[] args) {
         //print 0 to 99
@@ -32,5 +34,13 @@ public class StreamApp {
                 .findFirst();                   //첫 번째 숫자를 찾는다
 
         System.out.println(first.orElse(0));    //12
+
+        //print 0 : 1 : 2 : 3 : 4 : 5 : 6 : 7 : 8 : 9 : 10
+        String collect = IntStream
+                .rangeClosed(0, 10)
+                .mapToObj(String::valueOf)
+                .collect(joining(" : "));
+
+        System.out.println(collect);
     }
 }
