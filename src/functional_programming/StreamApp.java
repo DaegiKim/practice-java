@@ -9,23 +9,24 @@ import static java.util.stream.Collectors.joining;
 
 public class StreamApp {
     public static void main(String[] args) {
-        //print 0 to 99
-//        IntStream.range(0, 100).forEach(i -> System.out.println(i));
+        print0To99();
+        print0To100();
+        print0ToMAXOfInt();
+        print0ToInfinity();
+        filterAndMapExample();
+        collectAndJoiningExample();
+    }
 
-        //print 0 to 100
-//        IntStream.rangeClosed(0, 100).forEach(i -> System.out.println(i));
+    private static void collectAndJoiningExample() {
+        String collect = IntStream
+                .rangeClosed(0, 10)
+                .mapToObj(String::valueOf)
+                .collect(joining(" : "));
 
-        //print 0 to MAX of int
-//        IntStream.iterate(0, i -> i+1).forEach(i -> System.out.println(i));
+        System.out.println(collect);
+    }
 
-        //print 0 to infinity
-//        Stream.iterate(BigInteger.ONE, i -> i.add(BigInteger.ONE))
-//                .forEach(i -> System.out.println(i));
-
-
-        Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5);
-        System.out.println(integerStream.count());
-
+    private static void filterAndMapExample() {
         OptionalInt first = IntStream
                 .rangeClosed(0, 10)             //0 부터 10 까지 숫자 중에서
                 .filter(i -> i > 3 && i < 9)    //3~9 사이의 숫자를 골라
@@ -34,13 +35,22 @@ public class StreamApp {
                 .findFirst();                   //첫 번째 숫자를 찾는다
 
         System.out.println(first.orElse(0));    //12
+    }
 
-        //print 0 : 1 : 2 : 3 : 4 : 5 : 6 : 7 : 8 : 9 : 10
-        String collect = IntStream
-                .rangeClosed(0, 10)
-                .mapToObj(String::valueOf)
-                .collect(joining(" : "));
+    private static void print0ToInfinity() {
+        Stream.iterate(BigInteger.ONE, i -> i.add(BigInteger.ONE))
+                .forEach(i -> System.out.println(i));
+    }
 
-        System.out.println(collect);
+    private static void print0ToMAXOfInt() {
+        IntStream.iterate(0, i -> i+1).forEach(i -> System.out.println(i));
+    }
+
+    private static void print0To100() {
+        IntStream.rangeClosed(0, 100).forEach(i -> System.out.println(i));
+    }
+
+    private static void print0To99() {
+        IntStream.range(0, 100).forEach(i -> System.out.println(i));
     }
 }
