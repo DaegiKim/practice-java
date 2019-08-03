@@ -1,4 +1,4 @@
-package functional_programming;
+package java8.stream;
 
 import java.math.BigInteger;
 import java.util.OptionalInt;
